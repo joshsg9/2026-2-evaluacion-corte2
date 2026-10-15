@@ -3,7 +3,7 @@ import { Student } from "../../student/entities/student.entity"; // Importamos S
 import { User } from "../../user/entities/user.entity"; // Importamos User para la relación N:1 (quién creó el club)
 
 @Entity("program") // Le dice a TypeORM que esta clase es una tabla llamada "club" (synchronize: true la crea sola)
-export class Club {
+export class Program {
 
     @PrimaryGeneratedColumn("uuid") // Llave primaria; PostgreSQL genera un UUID automáticamente al insertar
     id: string; // Columna id de tipo UUID

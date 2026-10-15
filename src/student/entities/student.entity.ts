@@ -1,6 +1,7 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Grades } from "./grades.entity";
 import { ApiProperty } from "@nestjs/swagger";
+import { Program } from "src/program/entities/program.entity";
 
 @Entity()
 export class Student {
@@ -88,8 +89,13 @@ export class Student {
     )
     grades?: Grades[]
 
-    // TODO Reto 2: relación N:1 con Program -> propiedad `program?: Program`
-    //   (opcional: un estudiante puede no tener programa; si se borra el programa, queda en NULL)
+   
+    @ManyToOne( // MUCHOS estudiantes pertenecen a UN club (aquí vive la llave foránea "clubId")
+        () => Program, // Entidad del otro lado
+        (program) => program.members, // Propiedad inversa en Club
+        { nullable: true, onDelete: "SET NULL" } // Opcional; si se borra el club, Postgres pone clubId = NULL (el estudiante NO se borra)
+    )
+    program?: Program; // Club al que pertenece el estudiante (o null si no tiene)
 
     @BeforeInsert()
     checkNicknameInsert(){
