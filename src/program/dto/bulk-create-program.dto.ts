@@ -1,7 +1,13 @@
-// TODO Reto 3: reglas de validación con class-validator / class-transformer
-//   - programs: arreglo NO vacío de CreateProgramDto
-//   - cada elemento se debe validar con las mismas reglas de CreateProgramDto
-//     (pista: @ValidateNested({ each: true }) + @Type(() => CreateProgramDto))
+
+import { Type } from "class-transformer"; // Para convertir cada objeto del arreglo en una instancia de CreateClubDto
+import { ArrayNotEmpty, IsArray, ValidateNested } from "class-validator"; // Decoradores de validación
+import { CreateProgramDto } from "./create-program.dto"; // Reusamos las reglas de un solo club
+
 export class BulkCreateProgramDto {
 
+    @IsArray() // clubs debe ser arreglo
+    @ArrayNotEmpty() // no vacío
+    @ValidateNested({ each: true }) // valida CADA objeto con las reglas de CreateClubDto
+    @Type(() => CreateProgramDto) // SIN esto, ValidateNested no sabe qué clase usar y no valida nada
+    programs: CreateProgramDto[]; // Lista de clubes a crear
 }

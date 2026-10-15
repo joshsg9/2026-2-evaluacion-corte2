@@ -26,7 +26,7 @@ export class Program {
     // ---------- Reto 2: relación 1:N con Student ----------
     @OneToMany( // Un programa tiene MUCHOS estudiantes
         () => Student, // Entidad del otro lado de la relación (función para evitar problemas de import circular)
-        (student) => student.program, /
+        (student) => student.program, 
     )
     members?: Student[]; // Arreglo de miembros; la llave foránea (clubId) vive en la tabla student, no aquí
 

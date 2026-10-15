@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'; // Para registrar entidades del
 import { ProgramService } from './program.service';
 import { ProgramController } from './program.controller';
 import { Program } from './entities/program.entity'; 
+import { UserModule } from 'src/user/user.module';
  
 @Module({
   controllers: [ProgramController],
