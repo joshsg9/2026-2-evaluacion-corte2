@@ -13,5 +13,5 @@ export class CreateProgramDto {
 
     @IsInt()
     @IsPositive()
-    maxMembers: number; // Cupo máximo
+    credits: number; // Cupo máximo
 }

@@ -21,7 +21,7 @@ export class Program {
     code: string; 
 
     @Column("int") // Columna entera
-    credits: number; // Cupo máximo de miembros del club
+    credits: number; 
 
     // ---------- Reto 2: relación 1:N con Student ----------
     @OneToMany( // Un programa tiene MUCHOS estudiantes
