@@ -13,6 +13,12 @@ import { User } from '../user/entities/user.entity'; // Tipo User
 export class ProgramController {
   constructor(private readonly programService: ProgramService) {}
 
+  @Post() // SINGULAR: POST /api/club
+  @Auth(ValidRoles.admin, ValidRoles.teacher) // admin o teacher
+  create(@Body() createProgramDto: CreateProgramDto, @GetUser() user: User) { // body + usuario
+  return this.programService.create(createProgramDto, user); // Crea uno
+  }
+
   @Post('bulk') // PLURAL: POST /api/club/bulk  { "clubs": [...] }
   @Auth(ValidRoles.admin, ValidRoles.teacher) // admin o teacher
   createMany(@Body() bulkDto: BulkCreateProgramDto, @GetUser() user: User) { // lista + usuario
